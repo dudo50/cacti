@@ -166,8 +166,10 @@ export function assetToProto(asset: Asset, networkId: NetworkId): ProtoAsset {
       switch (asset.type) {
         case TokenType.NONSTANDARD_FUNGIBLE:
           protoAsset.amount = BigInt((asset as EvmFungibleAsset).amount);
-          if ((asset as FungibleAsset).uniqueDescriptor !== undefined) {
-            protoAsset.uniqueDescriptor = String((asset as FungibleAsset).uniqueDescriptor);
+          if ((asset as EvmFungibleAsset).uniqueDescriptor !== undefined) {
+            protoAsset.uniqueDescriptor = String(
+              (asset as EvmFungibleAsset).uniqueDescriptor,
+            );
           }
           protoAsset.contractAddress = (
             asset as EvmFungibleAsset

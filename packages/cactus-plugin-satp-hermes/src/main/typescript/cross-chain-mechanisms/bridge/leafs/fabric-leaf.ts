@@ -48,7 +48,7 @@ import {
   FabricFungibleAsset,
   //FabricNonFungibleAsset,
 } from "../ontology/assets/fabric-asset";
-import { Amount, Asset } from "../ontology/assets/asset";
+import { Amount, Asset, UniqueTokenID } from "../ontology/assets/asset";
 import { X509Identity } from "fabric-network";
 import { NetworkId } from "../../../public-api";
 import { getEnumKeyByValue } from "../../../services/utils";

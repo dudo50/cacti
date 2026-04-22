@@ -832,6 +832,11 @@ export type Asset = Message<"cacti.satp.v02.common.Asset"> & {
    * @generated from field: cacti.satp.v02.common.ERCTokenStandard erc_token_standard = 11;
    */
   ercTokenStandard: ERCTokenStandard;
+
+  /**
+   * @generated from field: string unique_descriptor = 12;
+   */
+  uniqueDescriptor?: string;
 };
 
 /**
