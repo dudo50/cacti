@@ -59,7 +59,8 @@ RUN mkdir -p \
     ${APP_DIR}/logs \
     ${APP_DIR}/config \
     ${APP_DIR}/ontologies \
-    ${APP_DIR}/database/migrations
+    ${APP_DIR}/database/migrations \
+    ${APP_DIR}/data
 
 # Copy application files
 COPY ./dist/bundle/ncc/ ${APP_DIR}
@@ -77,6 +78,8 @@ RUN npm install fabric-common bufferutil sqlite3 --build-from-source
 # Set environment
 ENV TZ=Etc/UTC
 ENV NODE_ENV=production
+ENV DATABASE_CLIENT=sqlite3
+ENV DATABASE_NAME=/opt/cacti/satp-hermes/database/satp.sqlite
 
 # Expose app ports
 EXPOSE 3010 3011 4010
@@ -86,5 +89,5 @@ ENTRYPOINT ["/usr/bin/supervisord"]
 CMD ["--configuration", "/etc/supervisord.conf", "--nodaemon"]
 
 # Health check
-HEALTHCHECK --interval=5s --timeout=10s --start-period=60s --retries=30 \
+HEALTHCHECK --interval=30s --timeout=10s --start-period=60s --retries=10 \
   CMD ["node", "./satp-hermes-gateway.Dockerfile.healthcheck.mjs", "http", "localhost", "4010"]

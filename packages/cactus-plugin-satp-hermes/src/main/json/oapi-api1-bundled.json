@@ -19,7 +19,7 @@
   },
   "servers": [
     {
-      "url": "http://{host}:{port}/api/v1/@hyperledger/cactus-plugin-satp-hermes",
+      "url": "http://{host}:{port}",
       "description": "Development server",
       "variables": {
         "host": {
@@ -167,13 +167,18 @@
                       "referenceId": {
                         "type": "string"
                       },
+                      "uniqueDescriptor": {
+                        "type": "string",
+                        "description": "Token ID or unique descriptor for ERC6909/ERC1155 tokens."
+                      },
                       "ercTokenStandard": {
                         "type": "string",
                         "enum": [
                           "UNSPECIFIED",
                           "ERC20",
                           "ERC721",
-                          "ERC1155"
+                          "ERC1155",
+                          "ERC6909"
                         ],
                         "description": "The ERC token standard."
                       }
@@ -251,13 +256,18 @@
                       "referenceId": {
                         "type": "string"
                       },
+                      "uniqueDescriptor": {
+                        "type": "string",
+                        "description": "Token ID or unique descriptor for ERC6909/ERC1155 tokens."
+                      },
                       "ercTokenStandard": {
                         "type": "string",
                         "enum": [
                           "UNSPECIFIED",
                           "ERC20",
                           "ERC721",
-                          "ERC1155"
+                          "ERC1155",
+                          "ERC6909"
                         ],
                         "description": "The ERC token standard."
                       }
@@ -4991,7 +5001,8 @@
               "UNSPECIFIED",
               "ERC20",
               "ERC721",
-              "ERC1155"
+              "ERC1155",
+              "ERC6909"
             ],
             "description": "The ERC token standard."
           }
@@ -5093,7 +5104,8 @@
                   "UNSPECIFIED",
                   "ERC20",
                   "ERC721",
-                  "ERC1155"
+                  "ERC1155",
+                  "ERC6909"
                 ],
                 "description": "The ERC token standard."
               }
@@ -5177,7 +5189,8 @@
                   "UNSPECIFIED",
                   "ERC20",
                   "ERC721",
-                  "ERC1155"
+                  "ERC1155",
+                  "ERC6909"
                 ],
                 "description": "The ERC token standard."
               }
@@ -10478,7 +10491,8 @@
           "UNSPECIFIED",
           "ERC20",
           "ERC721",
-          "ERC1155"
+          "ERC1155",
+          "ERC6909"
         ],
         "description": "The ERC token standard."
       },

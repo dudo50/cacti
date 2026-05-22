@@ -151,11 +151,12 @@ contract SATPWrapperContract is Ownable, ITraceableContract, IERC721Receiver{
         //TODO if the tokens are standard (eg. ERC20, ERC721...) use the standard interactions
         createNonStandardTokenOntology(tokenId, interactions);
 
+        // Set token data before CHECKPERMITION so interact() can resolve contractAddress
+        tokens[tokenId] = Token(contractName, contractAddress, tokenType, tokenId, referenceId, owner, 0, ercTokenStandard);
+
         if(tokensInteractions[tokenId][InteractionType.CHECKPERMITION].available) {
             require(interact(tokenId, InteractionType.CHECKPERMITION), "Contract does not have permission to interact with the token");
         }
-
-        tokens[tokenId] = Token(contractName, contractAddress, tokenType, tokenId, referenceId, owner, 0, ercTokenStandard);
     
         ids.push(tokenId);
         
@@ -502,9 +503,16 @@ contract SATPWrapperContract is Ownable, ITraceableContract, IERC721Receiver{
 
             bytes memory encodedParams = encodeDynamicParams(functionSelector, AssetParameterIdentifierEncoder(tokensInteractions[tokenId][interactionType].variables[i], tokenId, receiver, assetAttribute, uniqueDescriptor));
 
-            (bool callSuccess, ) = tokens[tokenId].contractAddress.call(encodedParams);
+            (bool callSuccess, bytes memory returnData) = tokens[tokenId].contractAddress.call(encodedParams);
             if (!callSuccess) {
                 return false;
+            }
+            // For permission-check interactions, also validate the bool return value.
+            // A successful call that returns false means the permission is denied.
+            if (interactionType == InteractionType.CHECKPERMITION) {
+                if (returnData.length == 0) return false;
+                bool permitted = abi.decode(returnData, (bool));
+                if (!permitted) return false;
             }
         } 
         return true;

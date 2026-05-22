@@ -56,7 +56,7 @@ externalDocs:
   description: 'For more information about the SATP Gateway Client, refer to the official documentation.'
   url: 'https://github.com/hyperledger/cacti/tree/main/packages/cactus-plugin-satp-hermes/README.md'
 servers:
-  - url: 'http://{host}:{port}/api/v1/@hyperledger/cactus-plugin-satp-hermes'
+  - url: 'http://{host}:{port}'
     description: Development server
     variables:
       host:
@@ -170,6 +170,7 @@ paths:
                         - ERC20
                         - ERC721
                         - ERC1155
+                        - ERC6909
                       description: The ERC token standard.
                 receiverAsset:
                   description: An asset
@@ -233,6 +234,7 @@ paths:
                         - ERC20
                         - ERC721
                         - ERC1155
+                        - ERC6909
                       description: The ERC token standard.
       responses:
         '200':
@@ -3824,6 +3826,7 @@ components:
             - ERC20
             - ERC721
             - ERC1155
+            - ERC6909
           description: The ERC token standard.
     TransactRequest:
       description: 'Request schema for initiating a transaction. Includes details such as the transaction context, mode (data or transfer), payload, and information about the source and destination DLT networks.'
@@ -3902,6 +3905,7 @@ components:
                 - ERC20
                 - ERC721
                 - ERC1155
+                - ERC6909
               description: The ERC token standard.
         receiverAsset:
           description: An asset
@@ -3965,6 +3969,7 @@ components:
                 - ERC20
                 - ERC721
                 - ERC1155
+                - ERC6909
               description: The ERC token standard.
     TransactResponse:
       description: Response schema for a transaction request. Includes the session ID and the current status of the transaction.
@@ -7978,6 +7983,7 @@ components:
         - ERC20
         - ERC721
         - ERC1155
+        - ERC6909
       description: The ERC token standard.
     DraftVersions:
       type: object
